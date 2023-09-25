@@ -1,13 +1,19 @@
 import React from "react";
 import "./App.css";
-import { Task } from "./components/Task";
-import { TaskFormModal } from "./components/TaskFormModal";
 import { data } from "./data/tasks";
+import { TaskFormModal } from "./components/TaskFormModal";
+import Header from "./components/Header"
+import { TasksList } from "./components/TasksList";
 
 const App = () => {
   const title = "To do list";
   const tasks = data;
   const taskToEdit: any = null;
+  const [showModal, setShowModal] = React.useState(false);
+
+  const handleOpenModal = () => {
+    setShowModal(false);
+  };
 
   const updateTaskState = (taskId: number) => {
     console.error("I need to be implemented");
@@ -28,22 +34,21 @@ const App = () => {
 
   return (
     <div className="main">
-      <div className="header">
-        <h1>Replace me using the title const</h1>
-      </div>
-      <Task />
+      <Header title={ title }/>
+      <TasksList tasks={ tasks }/>
       <button
         className="add-task-btn"
-        onClick={() => console.log("this button should open the modal")}
+        onClick={(handleOpenModal)}
       >
         +
       </button>
       <TaskFormModal
-        show={false}
-        handleClose={() =>
-          console.log("pass me a method that will close the modal")
-        }
-        addOrEditTask={addOrEditTask}
+        show={showModal}
+        handleClose={() => setShowModal(false)} addOrEditTask={function (event: any, taskId?: number | undefined): void {
+          throw new Error("Function not implemented.");
+          // console.log("pass me a method that will close the modal");
+        } }
+        // addOrEditTask={addOrEditTask}
         initialValues={
           taskToEdit != null
             ? {
@@ -59,3 +64,6 @@ const App = () => {
 };
 
 export default App;
+function useState(arg0: boolean): [any, any] {
+  throw new Error("Function not implemented.");
+}

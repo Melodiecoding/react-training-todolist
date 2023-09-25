@@ -14,22 +14,27 @@ export const TaskFormModal = ({
   addOrEditTask,
   initialValues,
 }: TaskFormModalProps) => {
-  const [title, setTitle] = useState(initialValues?.title ?? undefined);
-  const [description, setDescription] = useState(
-    initialValues?.description ?? undefined
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [title, setTitle] = React.useState(initialValues?.title ?? '');
+  const [description, setDescription] = React.useState(
+    initialValues?.description ?? ''
   );
 
+  useEffect(() => {
+    setIsModalOpen(show);
+  }, [show]);
   // Use a hook to listen to the initial values changes here
 
   if (!show) return null;
 
-  return (
+  return (<>
+  {isModalOpen && (
     <div className="modal">
       <section className="modal-main">
         <button
           className="close-btn"
           type="button"
-          onClick={() => "The modal should close iteself"}
+          onClick= {() => setIsModalOpen(true)} 
         >
           X
         </button>
@@ -67,5 +72,7 @@ export const TaskFormModal = ({
         </form>
       </section>
     </div>
+  )}
+  </>
   );
 };
